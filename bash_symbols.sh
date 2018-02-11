@@ -4,20 +4,20 @@ checkmark='\u2714'
 music='\u266b'
 fail='\u2718'
 
-s_loop() {
- for i in $(seq 1 ${1}); do echo -ne $2; done 
- echo -ne "\n"
+function s_loop() {
+  for i in $(seq 1 ${1}); do echo -ne $2; done 
+  echo -ne "\n"
 }
 
-s_checkmark() {
+function symbol.checkmark() {
   s_loop ${1-1} $checkmark
 }
 
-s_music() { 
+function symbol.music() { 
   s_loop ${1-1} $music 
 }
 
-s_fail() {
+function symbol.fail() {
   s_loop ${1-1} $fail
 }
 
