@@ -1,5 +1,5 @@
 #!/bin/sh
 
 function enginestart() {
- screen share/ovirt-engine/services/ovirt-engine/ovirt-engine.py start
+ screen -t "ovirt-engine - running" share/ovirt-engine/services/ovirt-engine/ovirt-engine.py start
 }
