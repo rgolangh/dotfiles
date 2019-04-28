@@ -1,13 +1,13 @@
 #!/bin/sh
 
-export ENGINE_URL=https://localhost:28443
+export ENGINE_URL=https://localhost:8443
 export ENGINE_USER_PASS=admin@internal:123
 
 function enginecurl () 
 { 
     local uri=$1;
     shift;
-    curl -k -s -u ${ENGINE_USER_PASS} -H "All-Content: true" -H "Accept: application/json" -H "Content-Type: application/json" $@ ${ENGINE_URL}/ovirt-engine/api/$uri
+    curl -k -s -u ${ENGINE_USER_PASS} -H "All-Content: true" -H "Accept: application/json" -H "Content-Type: application/json" "$@" ${ENGINE_URL}/ovirt-engine/api/$uri
 }
 
 function token() {
