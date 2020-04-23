@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/bin/sh 
 
 function repogrep() {
   pushd .
-  local term=$1
-  shift
-  for repo in $@; do
-    cd $repo
-    git grep $term
-    cd -
+  for repo in $(find . -maxdepth 1 -type d); do
+    if [[ -d "$repo/.git" ]];then
+      cd $repo
+      git grep --full-name $1
+      cd -
+    fi
   done
   popd
 }
