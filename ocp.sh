@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function latest_release() {
-        curl -s https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp-dev-preview/latest-4.5/release.txt | awk '/^Pull From:/ {print $3}'
+        curl -s https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp-dev-preview/latest-4.6/release.txt | awk '/^Pull From:/ {print $3}'
 }
 
 #export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=docker.io/rgolangh/ocp-release-dev:latest
