@@ -13,7 +13,7 @@ function installModule() {
 modinfo v4l2loopback || installModule
 
 # Create a virtual video device using this kernel module
-sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2
+sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2 devices=4
 echo "Loaded kernel module"
 
 
