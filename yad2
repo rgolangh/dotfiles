@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+# This parser using css selectors. Uses the great pup tool. CAPTCHA is a gotcha.
+
+UA='Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0'
+URL='https://www.yad2.co.il/realestate/rent?city=8700&neighborhood=798' 
+
+curl -L --user-agent "$UA" "$URL" | pup '.feeditem span span'
+
+
+
