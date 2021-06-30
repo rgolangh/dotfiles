@@ -1,0 +1,39 @@
+#!/bin/bash -e
+
+usage() {
+  cat << __EOF__
+				USAGE: $0 -p [user-password] infile outfile
+			
+				-p
+				    Provide password or "-" to read from stdin
+
+				-h, -help, --help
+				    Show this help message
+__EOF__
+  return 0
+}
+
+while getopts "p:h-help" opt; do                                                                                            
+  case ${opt} in                                                                                                        
+    p)                                                                                                                  
+      password="$OPTARG";;
+    h)                                                                                                                  
+      usage                                                                                                             
+      exit 0;;                                                                                                          
+    \?)                                                                                                                 
+      echo "Invalid option: -$OPTARG" >&2                                                                               
+      usage                                                                                                             
+      exit 1;;                                                                                                          
+  esac                                                                                                                  
+done
+
+infile=${@:$OPTIND:1}
+outfile=${@:$OPTIND+1:1}
+
+if [[ "$password" == "-" ]]; then
+				password=$(cat /proc/self/fd/0)
+fi
+
+# "qpdf --encrypt  [user-password] [owner-password] 128 -- infile outfile
+qpdf --encrypt ${password} "" 128 -- "$infile" "$outfile"
+
