@@ -13,7 +13,7 @@ function bz() {
 }
 
 function bz_remove_me_from_cc {
-	bz bug/$1 -XPUT -d '{"cc": {"remove": ["rgolan@redhat.com"]}}'
+	bz bug/"$1" -XPUT -d '{"cc": {"remove": ["rgolan@redhat.com"]}}'
 }
 
 function bz_add_url {
@@ -21,5 +21,5 @@ function bz_add_url {
 	shift;
 	local url=$1
 	shift;
-	bz bug/${bzid} -XPUT -d "{\"url\" : \"${url}\"}"
+	bz bug/"${bzid}" -XPUT -d "{\"url\" : \"${url}\"}"
 }

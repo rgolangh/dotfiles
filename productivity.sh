@@ -2,7 +2,7 @@
 
 function dnd() {
 	v=$(gsettings get org.gnome.desktop.notifications show-banners)
-	gsettings set org.gnome.desktop.notifications show-banners $([ $v == "true" ] && echo false || echo true)
+	gsettings set org.gnome.desktop.notifications show-banners $([ "$v" == "true" ] && echo false || echo true)
 }
 
 

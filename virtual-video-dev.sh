@@ -2,7 +2,7 @@
 
 # compile and install the module.
 function installModule() {
-	cd $HOME/src/v4l2loopback
+	cd "$HOME"/src/v4l2loopback
 	make clean
 	make
 	sudo make install

@@ -35,5 +35,5 @@ if [[ "$password" == "-" ]]; then
 fi
 
 # "qpdf --encrypt  [user-password] [owner-password] 128 -- infile outfile
-qpdf --encrypt ${password} "" 128 -- "$infile" "$outfile"
+qpdf --encrypt "${password}" "" 128 -- "$infile" "$outfile"
 

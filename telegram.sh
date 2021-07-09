@@ -9,7 +9,7 @@ function tgmsg() {
 }
 
 function tgfile() {
-  tgcurlpost "sendDocument?chat_id=${TELEGRAM_CHAT_ID}" $1
+  tgcurlpost "sendDocument?chat_id=${TELEGRAM_CHAT_ID}" "$1"
 }
 
 function tgcurl() {
@@ -21,5 +21,5 @@ function tgcurl() {
 function tgcurlpost() {
   p=$1
   shift
-  curl -vv -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/${p}" -F document=@$1 
+  curl -vv -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/${p}" -F document=@"$1"
 }
