@@ -24,7 +24,7 @@ export HISTCONTROL='ignoreboth' #  - ignoreboth = ignorespace and ignoredup
 export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
 export GOROOT=/usr/lib/golang
 export PROMPT_DIRTRIM=2
-export CDPATH=$HOME/src:$HOME/go/src/github.com/openshift
+export CDPATH=".":$HOME/src:$HOME/go/src/github.com/openshift
 export PATH=$GOPATH/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS
 
 # script dependencies
