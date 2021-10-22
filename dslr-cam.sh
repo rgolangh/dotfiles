@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-# This scripts enables a a toggle on/off of a virtual camera. Combining with dslr-webcam.desktop
+# This scripts enables a a toggle on/off of a virtual camera. Combining with dslr-cam.desktop
 # launcher makes it even more convenient.
 
 function app() {

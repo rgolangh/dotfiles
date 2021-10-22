@@ -25,6 +25,6 @@ alias l='less'
 alias t='task'
 alias xclip='clip'
 alias ag='agrind'
-
+alias diff='diff --color'
 
 

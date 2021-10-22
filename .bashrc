@@ -7,6 +7,7 @@ fi
 source ~/.bash_secrets
 
 export TERM=xterm-256color
+export EDITOR=nvim
 export GIT_EDITOR=nvim
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1

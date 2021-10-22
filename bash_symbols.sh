@@ -5,20 +5,20 @@ music='\u266b'
 fail='\u2718'
 
 function s_loop() {
-  for i in $(seq 1 "${1}"); do echo -ne "$2"; done 
-  echo -ne "\n"
+	for i in $(seq 1 "${1}"); do echo -ne "$2"; done
+	echo -ne "\n"
 }
 
 function symbol.checkmark() {
-  s_loop "${1-1}" $checkmark
+	s_loop "${1-1}" $checkmark
 }
 
 function symbol.music() { 
-  s_loop "${1-1}" $music 
+	s_loop "${1-1}" $music
 }
 
 function symbol.fail() {
-  s_loop "${1-1}" $fail
+	s_loop "${1-1}" $fail
 }
 
 # vi: nospell

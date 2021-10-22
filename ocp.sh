@@ -9,7 +9,6 @@ function latest_release() {
 export OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=$(latest_release)
 export OPENSHIFT_INSTALL_OS_IMAGE_OVERRIDE=catapult-rhcos
 export KUBECONFIG=$HOME/deploy/ocp/catapult/auth/kubeconfig
-source <(oc completion bash)
 
 alias ocmao='oc -n openshift-machine-api'
 alias occsi='oc -n ovirt-csi-driver'

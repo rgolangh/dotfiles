@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=DSL-CAM
+MimeType=image/svg
+Exec=dslr-cam.sh
+NoDisplay=false
+StartupNotify=true
+Icon=camera-web.svg
