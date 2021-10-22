@@ -3,6 +3,8 @@
 # This scripts enables a a toggle on/off of a virtual camera. Combining with dslr-cam.desktop
 # launcher makes it even more convenient.
 
+
+
 function app() {
 	# this makes sure we kill all child process when the app exists
 	trap 'kill $(jobs -p)' EXIT
@@ -16,5 +18,5 @@ function app() {
 }
 
 
-source toggle-helper.sh
+source $(dirname $(readlink -f ${BASH_SOURCE[0]}))/toggle-helper.sh
 toggle
