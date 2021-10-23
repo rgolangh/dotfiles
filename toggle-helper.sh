@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # a generic implementation of a toggle pattern. The calling script
-# must call its main function 'app' and declare a trap command
+# should pass the function name as the first argument and declare a trap command
 # to kill all child processes.
 #
 # function app() {
@@ -16,7 +16,7 @@ function toggle() {
 		rm $pid
 		return
 	fi
-	( app "$@" ) &
+	( $1 ) &
 	echo $! > $pid
 }
 

@@ -19,4 +19,4 @@ function app() {
 
 
 source $(dirname $(readlink -f ${BASH_SOURCE[0]}))/toggle-helper.sh
-toggle
+toggle app
