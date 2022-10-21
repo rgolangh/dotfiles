@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function tgmsg() {
+function tg_msg() {
   if [ "$#" -ne 1 ] ; then
     echo "specify message"
     return
@@ -8,18 +8,12 @@ function tgmsg() {
   curl -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/sendMessage?text=${1}&chat_id=${TELEGRAM_CHAT_ID}"
 }
 
-function tgfile() {
-  tgcurlpost "sendDocument?chat_id=${TELEGRAM_CHAT_ID}" "$1"
-}
+function tg_send_doc() {
+    if [ "$#" -ne 1 ] ; then
+      echo "missing file"
+      return 1
+    fi
 
-function tgcurl() {
-  verb=$1
-  shift
-  curl -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/${verb}" $@
-}
-
-function tgcurlpost() {
-  p=$1
-  shift
-  curl -vv -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/${p}" -F document=@"$1"
+    curl "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}" \
+        -F document=@"${1}"
 }

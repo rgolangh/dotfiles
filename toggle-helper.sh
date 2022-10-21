@@ -13,10 +13,18 @@ function toggle() {
 	pid=/var/run/user/${UID}/$(basename ${0}).pid
 	if [ -f $pid ];then
 		kill -TERM $(cat $pid) || true
-		rm $pid
+	    toggle::cleanup
 		return
 	fi
+
 	( $1 ) &
-	echo $! > $pid
+
+	if (( $? == 0 )); then
+		echo $! > $pid
+	fi
 }
 
+
+function toggle::cleanup() {
+	 rm /var/run/user/${UID}/$(basename ${0}).pid || true
+ }
