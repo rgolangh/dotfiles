@@ -19,7 +19,7 @@ function noise() {
 }
 
 function remove_unknown_ssh() {
-    if [[ "$#" -lt 1 ]]; then
+    if [[ "$#" == 0 ]]; then
         echo "missing ip (or segment of it) to remove from known_hosts"
         return 1
     fi
