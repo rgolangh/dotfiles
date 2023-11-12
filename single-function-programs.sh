@@ -16,7 +16,7 @@ phone () {
 rhuser () {
 	local ldapuserid=$1;
 	shift;
-	ldapsearch -x -h ldap.corp.redhat.com -b "ou=users,dc=redhat,dc=com" "uid=$ldapuserid" $@
+	ldapsearch -x -H ldap://ldap.corp.redhat.com -b "ou=users,dc=redhat,dc=com" "uid=$ldapuserid" $@
 }
 
 function toJava10() {
