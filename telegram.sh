@@ -5,7 +5,7 @@ function tg_msg() {
     echo "specify message"
     return
   fi
-  curl -k "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/sendMessage?text=${1}&chat_id=${TELEGRAM_CHAT_ID}"
+  curl "https://api.telegram.org/bot${TELEGRAM_BOT_ID}/sendMessage?text=${1}&chat_id=${TELEGRAM_CHAT_ID}"
 }
 
 function tg_send_doc() {
@@ -14,6 +14,6 @@ function tg_send_doc() {
       return 1
     fi
 
-    curl "${TELEGRAM_URL}${TELEGRAM_BOT_ID}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}" \
+    curl "https://api.telegram.org/bot${TELEGRAM_BOT_ID}/sendDocument?chat_id=${TELEGRAM_CHAT_ID}" \
         -F document=@"${1}"
 }

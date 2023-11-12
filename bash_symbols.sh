@@ -9,10 +9,13 @@ function s_loop() {
 	echo -ne "\n"
 }
 
+function symbol.v() {
+	s_loop "${1-1}" '\u2705' 
+}
+
 function symbol.checkmark() {
 	s_loop "${1-1}" $checkmark
 }
-
 function symbol.music() { 
 	s_loop "${1-1}" $music
 }

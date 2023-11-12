@@ -12,12 +12,13 @@
 function toggle() {
 	pid=/var/run/user/${UID}/$(basename ${0}).pid
 	if [ -f $pid ];then
-		kill -TERM $(cat $pid) || true
-	    toggle::cleanup
+        process_group_id=$(ps --no-headers -o pgid:1 -p $(cat $pid))
+        kill -TERM -${process_group_id} || true
+		toggle::cleanup
 		return
 	fi
 
-	( $1 ) &
+	( trap 'toggle::cleanup' EXIT && $1 ) &
 
 	if (( $? == 0 )); then
 		echo $! > $pid
@@ -27,4 +28,6 @@ function toggle() {
 
 function toggle::cleanup() {
 	 rm /var/run/user/${UID}/$(basename ${0}).pid || true
- }
+}
+
+
