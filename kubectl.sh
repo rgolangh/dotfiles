@@ -8,4 +8,7 @@ source <(kubectl completion bash)
 alias k='kubectl'
 complete -F __start_kubectl k
 
+function ns() {
+    kubectl config set-context --current --namespace "${1:-default}"
+}
 
