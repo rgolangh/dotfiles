@@ -9,7 +9,11 @@ alias k='kubectl'
 complete -F __start_kubectl k
 
 function ns() {
-    kubectl config set-context --current --namespace "${1:-default}"
+    if [ -z "$1" ]; then
+        kubectl config view --minify -o jsonpath='{..namespace}{"\n"}'
+        return
+    fi
+    kubectl config set-context --current --namespace "${1}"
 }
 
 # inspired and learned a lot from this article - https://opensource.com/article/18/3/creating-bash-completion-script
