@@ -22,10 +22,10 @@ jobs:
           cd helm-repo
           git switch -c autopr-$RANDOM
           mkdir -p charts/workflows/charts/${{ inputs.workflow_id }}/templates
-          touch charts/workflows/charts/${{ inputs.workflow_id }}/templates/test.txt
+          echo foo >  charts/workflows/charts/${{ inputs.workflow_id }}/templates/test.txt
           git add -A
           git commit -m "Automated PR from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}"
-          git status
+          git log -3 
           git remote -v
           gh pr create --head -f --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
             --body "Updating generated manifests for ${{ inputs.workflow_id }} workflow"
