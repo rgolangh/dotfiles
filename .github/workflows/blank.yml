@@ -16,10 +16,10 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.NEW_HELM_REPO_TOKEN }}
       run: |
-          gh repo clone $WF_HELM_REPO helm-repo
-          cd helm-repo
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
+          gh repo clone $WF_HELM_REPO helm-repo
+          cd helm-repo
           git switch -c autopr-$RANDOM
           mkdir -p charts/workflows/charts/${{ inputs.workflow_id }}/templates
           touch charts/workflows/charts/${{ inputs.workflow_id }}/templates/test.txt
