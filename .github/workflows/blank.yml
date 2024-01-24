@@ -1,36 +1,31 @@
-# This is a basic workflow to help you get started with Actions
+name: Reusable Workflow Building Container Images and Manifests
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  
+env:
+  WF_HELM_REPO: rgolangh/serverless-workflows-helm
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  open-pr:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    permissions:
+      pull-requests: write
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    - name: Send PRs to helm repo
+      if: ${{ inputs.push_pr }}
+      env:
+        GH_TOKEN: ${{ secrets.NEW_HELM_REPO_TOKEN }}
+      run: |
+          gh repo clone $WF_HELM_REPO helm-repo
+          cd helm-repo
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git switch -c autopr-$RANDOM
+          mkdir -p charts/workflows/charts/${{ inputs.workflow_id }}/templates
+          touch charts/workflows/charts/${{ inputs.workflow_id }}/templates/test.txt
+          git add -A
+          git commit -m "Automated PR from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}"
+          git push origin HEAD
+          gh pr create --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
+            --body "Updating generated manifests for ${{ inputs.workflow_id }} workflow"
