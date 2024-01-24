@@ -22,7 +22,7 @@ jobs:
           cd helm-repo
           git switch -c autopr-$RANDOM
           mkdir -p charts/workflows/charts/${{ inputs.workflow_id }}/templates
-          cp ../${{ inputs.workflow_id }}/manifests/* charts/workflows/charts/${{ inputs.workflow_id }}/templates
+          echo foo > charts/workflows/charts/${{ inputs.workflow_id }}/templates/foo
           git add -A
           git commit -m "Automated PR from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}"
           git remote set-url origin https://${{ env.GH_TOKEN }}@github.com/$WF_HELM_REPO
