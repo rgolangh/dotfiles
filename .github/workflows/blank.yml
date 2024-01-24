@@ -27,5 +27,7 @@ jobs:
           git commit -m "Automated PR from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}"
           git log -3 
           git remote -v
-          gh pr create --head -f --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
+          git remote set-url origin https://${{ env.GH_TOKEN }}@github.com/$WF_HELM_REPO
+          git push origin HEAD
+          gh pr create -f --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
             --body "Updating generated manifests for ${{ inputs.workflow_id }} workflow"
