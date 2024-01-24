@@ -13,7 +13,6 @@ jobs:
       pull-requests: write
     steps:
     - name: Send PRs to helm repo
-      if: ${{ inputs.push_pr }}
       env:
         GH_TOKEN: ${{ secrets.NEW_HELM_REPO_TOKEN }}
       run: |
