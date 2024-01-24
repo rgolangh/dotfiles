@@ -27,6 +27,5 @@ jobs:
           git commit -m "Automated PR from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}"
           git status
           git remote -v
-          git push origin HEAD
-          gh pr create --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
+          gh pr create -f --title "Automatic manifests generation from ${{ github.event.pull_request.html_url }} ${{ github.event.issue.html_url }}" \
             --body "Updating generated manifests for ${{ inputs.workflow_id }} workflow"
