@@ -20,14 +20,20 @@ jobs:
       
       with:
         script: |
-          return (
+          const r = (
             await github.rest.repos.listPullRequestsAssociatedWithCommit({
               commit_sha: context.sha,
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
           ).data[0];
+          if (r != null) {
+            return r;
+          }
+          return '{}';
+          
     - name: Pull Request data
+     
       run: |
         echo '${{ steps.get_pr_data.outputs.result}}'
         echo '${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
