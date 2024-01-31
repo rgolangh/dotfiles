@@ -12,6 +12,22 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+    - uses: actions/github-script@v7
+      id: get_pr_data
+      with:
+        script: |
+          return (
+            await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              commit_sha: context.sha,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+          ).data[0];
+    - name: Pull Request data
+      run: |
+        echo '${{ fromJson(steps.get_pr_data.outputs.result).html_url }}'
+    
+    
     - name: Send PRs to helm repo
       env:
         GH_TOKEN: ${{ secrets.HELM_REPO_TOKEN }}
