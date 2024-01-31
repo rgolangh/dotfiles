@@ -26,7 +26,7 @@ jobs:
           ).data[0];
     - name: Pull Request data
       run: |
-        echo '${{ fromJson(steps.get_pr_data.outputs.result).html_url }}'
+        echo '${{ fromJson(steps.get_pr_data.outputs.result) }}'
     
     
     - name: Send PRs to helm repo
