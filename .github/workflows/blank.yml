@@ -34,6 +34,7 @@ jobs:
     
     
     - name: Send PRs to helm repo
+      if: never()
       env:
         GH_TOKEN: ${{ secrets.HELM_REPO_TOKEN }}
       run: |
