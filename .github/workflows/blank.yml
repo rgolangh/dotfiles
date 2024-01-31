@@ -2,6 +2,7 @@ name: Reusable Workflow Building Container Images and Manifests
 
 on:
   workflow_dispatch:
+  push:
   
 env:
   WF_HELM_REPO: rgolangh/serverless-workflows-helm
@@ -29,7 +30,7 @@ jobs:
           ).data[0];
     - name: Pull Request data
       run: |
-        echo '${{ steps.get_pr_data.outputs.result }}'
+        echo '${{ fromJson(steps.get_pr_data.outputs.result) }}'
     
     
     - name: Send PRs to helm repo
