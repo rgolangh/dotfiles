@@ -39,7 +39,7 @@ jobs:
         echo '${{ steps.get_pr_data.outputs.result.html_url }}'
         echo '${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
-        echo '${{ github.event }}'
+        echo '${{ toJSON(github.event) }}'
     
     - name: Pull Request data new is result == ""
       if: ${{ steps.get_pr_data.outputs.result == '' }}
