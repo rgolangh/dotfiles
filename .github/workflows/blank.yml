@@ -34,7 +34,7 @@ jobs:
         echo '${{ toJSON(steps.get_pr_data.outputs) }}'
         
     - name: Pull Request data new if result != ""
-      if: ${{ steps.get_pr_data.outputs.result != '""' }}
+      if: ${{ steps.get_pr_data.outputs.result != '' }}
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
         echo '${{ steps.get_pr_data.outputs.result.html_url }}'
@@ -43,7 +43,7 @@ jobs:
         echo '${{ github.event }}'
     
     - name: Pull Request data new is result == ""
-      if: ${{ steps.get_pr_data.outputs.result == '""' }}
+      if: ${{ steps.get_pr_data.outputs.result == '' }}
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
         echo '${{ github.event.pull_request.html_url }} '
