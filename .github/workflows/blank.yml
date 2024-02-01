@@ -34,7 +34,7 @@ jobs:
 
     - name: get pr data outputs
       run: |
-        echo '${{ fromJSON(steps.get_pr_data.outputs) }}'
+        echo '${{ steps.get_pr_data.outputs }}'
         
     - name: Pull Request data new
       run: |
