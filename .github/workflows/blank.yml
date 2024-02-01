@@ -20,14 +20,13 @@ jobs:
       
       with:
         script: |
-          const r = (
+          return (
             await github.rest.repos.listPullRequestsAssociatedWithCommit({
               commit_sha: context.sha,
               owner: context.repo.owner,
               repo: context.repo.repo,
             })
           ).data[0];
-          return r;
 
     - name: get pr data outputs
       run: |
@@ -38,7 +37,7 @@ jobs:
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
         echo '${{ steps.get_pr_data.outputs.result.html_url }}'
-        echo '${{ github.event.pull_request.html_url }} '
+        echo '${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
         echo '${{ github.event }}'
     
@@ -46,9 +45,9 @@ jobs:
       if: ${{ steps.get_pr_data.outputs.result == '' }}
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
-        echo '${{ github.event.pull_request.html_url }} '
+        echo '${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
-        echo '${{ github.event }}'
+        echo '${{ toJSON(github.event) }}'
     
     
     - name: Send PRs to helm repo
