@@ -35,8 +35,11 @@ jobs:
     - name: Pull Request data
      
       run: |
-        echo '${{ steps.get_pr_data.outputs.result}}'
-        echo '${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
+        echo 'get pr data ${{ steps.get_pr_data.outputs.result}}'
+        echo 'get pr html url ${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
+        echo 'event pull request html url ${{ github.event.pull_request.html_url }} '
+        echo 'github actor ${{ github.actor }}'
+        echo 'github event ${{ fromJSON(github.event) }}'
     
     
     - name: Send PRs to helm repo
