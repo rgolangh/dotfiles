@@ -33,7 +33,7 @@ jobs:
         echo '${{ toJSON(steps.get_pr_data.outputs) }}'
         
     - name: Pull Request data new if result != ""
-      if: ${{ steps.get_pr_data.outputs.result != '' }}
+      if: ${{ toJSON(steps.get_pr_data.outputs.result) != '' }}
       run: |
         echo 'pr data html url ${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
         echo 'event pr html url ${{ github.event.pull_request.html_url }}'
@@ -43,7 +43,7 @@ jobs:
         COMMIT_ORIGIN: '${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
     
     - name: Pull Request data new is result == ""
-      if: ${{ steps.get_pr_data.outputs.result == '' }}
+      if: ${{ toJSON(steps.get_pr_data.outputs.result) == '' }}
       run: |
         echo 'event pr html url ${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
