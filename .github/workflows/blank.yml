@@ -36,7 +36,7 @@ jobs:
       if: ${{ steps.get_pr_data.outputs.result != '' }}
       run: |
         echo 'pr data results ${{ steps.get_pr_data.outputs.result }}'
-        echo 'pr data html url ${{ steps.get_pr_data.outputs.result.html_url }}'
+        echo 'pr data html url ${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
         echo 'event pr html url ${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
         echo '${{ toJSON(github.event) }}'
