@@ -54,7 +54,7 @@ jobs:
         COMMIT_ORIGIN: echo '${{ github.event.head_commit.url }}'
 
     - name: Commit origin
-      run: echo '${{ env.COMMIT_ORIGIN }}'
+      run: echo $COMMIT_ORIGIN
     
     - name: Send PRs to helm repo
       if: false
