@@ -39,6 +39,8 @@ jobs:
         echo 'event pr html url ${{ github.event.pull_request.html_url }}'
         echo '${{ github.actor }}'
         echo '${{ toJSON(github.event) }}'
+      env:
+        COMMIT_ORIGIN: '${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
     
     - name: Pull Request data new is result == ""
       if: ${{ steps.get_pr_data.outputs.result == '' }}
@@ -48,7 +50,11 @@ jobs:
         echo 'commit by ${{ github.event.head_commit.author.email }}'
         echo 'commit url ${{ github.event.head_commit.url }}'
         echo '${{ toJSON(github.event) }}'
-    
+      env:
+        COMMIT_ORIGIN: echo '${{ github.event.head_commit.url }}'
+
+    - name: Commit origin
+      run: echo '${{ env.COMMIT_ORIGIN }}'
     
     - name: Send PRs to helm repo
       if: false
