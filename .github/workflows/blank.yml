@@ -30,7 +30,7 @@ jobs:
           if (r != null) {
             return r;
           }
-          return '{}';
+          return '';
 
     - name: get pr data outputs
       run: |
