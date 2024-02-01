@@ -33,13 +33,22 @@ jobs:
       run: |
         echo '${{ toJSON(steps.get_pr_data.outputs) }}'
         
-    - name: Pull Request data new
+    - name: Pull Request data new if result != ""
+      if: ${{ steps.get_pr_data.outputs.result != "" }}
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
-        echo '${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
+        echo '${{ steps.get_pr_data.outputs.result.html_url }}'
         echo '${{ github.event.pull_request.html_url }} '
         echo '${{ github.actor }}'
-        echo '${{ fromJSON(github.event) }}'
+        echo '${{ github.event }}'
+    
+    - name: Pull Request data new is result == ""
+      if: ${{ steps.get_pr_data.outputs.result == "" }}
+      run: |
+        echo '${{ steps.get_pr_data.outputs.result }}'
+        echo '${{ github.event.pull_request.html_url }} '
+        echo '${{ github.actor }}'
+        echo '${{ github.event }}'
     
     
     - name: Send PRs to helm repo
