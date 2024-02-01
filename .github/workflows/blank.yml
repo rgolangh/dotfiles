@@ -27,10 +27,7 @@ jobs:
               repo: context.repo.repo,
             })
           ).data[0];
-          if (r != null) {
-            return r;
-          }
-          return '';
+          return r;
 
     - name: get pr data outputs
       run: |
