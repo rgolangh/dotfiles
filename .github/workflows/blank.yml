@@ -32,8 +32,7 @@ jobs:
           }
           return '{}';
           
-    - name: Pull Request data
-     
+    - name: Pull Request data new
       run: |
         echo 'get pr data ${{ steps.get_pr_data.outputs.result}}'
         echo 'get pr html url ${{ fromJSON(steps.get_pr_data.outputs.result).html_url }}'
