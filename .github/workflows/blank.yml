@@ -57,6 +57,7 @@ jobs:
         else
           echo ${{ github.event.head_commit.url }}
         fi
+        echo commit authored by  ${{ github.event.head_commit.author.email }}
     
     - name: Send PRs to helm repo
       if: false
