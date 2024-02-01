@@ -31,7 +31,11 @@ jobs:
             return r;
           }
           return '{}';
-          
+
+    - name: get pr data outputs
+      run: |
+        echo '${{ steps.get_pr_data.outputs }}'
+        
     - name: Pull Request data new
       run: |
         echo '${{ steps.get_pr_data.outputs.result }}'
