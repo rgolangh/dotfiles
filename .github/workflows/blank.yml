@@ -14,6 +14,11 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+    - name: if not PR and is push
+      run: |
+           echo pr merged ${{ github.event.pull_request.merged }}
+           
+            
     - name: get pr data
       uses: actions/github-script@v7
       id: get_pr_data
