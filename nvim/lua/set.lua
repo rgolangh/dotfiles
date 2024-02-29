@@ -1,6 +1,11 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
-
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4    
+vim.cmd([[
+    au TextYankPost * silent! lua vim.highlight.on_yank()
+]])
 --Set highlight on search
 vim.opt.incsearch = true
 
@@ -31,7 +36,7 @@ vim.wo.signcolumn = 'yes'
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme rose-pine")
 
 vim.opt.colorcolumn = "80"
 

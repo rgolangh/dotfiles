@@ -8,6 +8,3 @@ vim.api.nvim_exec(
     false
 )
 
-vim.cmd [[
- set shiftwidth=4
- ]]
