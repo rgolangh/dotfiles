@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
             { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'saadparwaiz1/cmp_luasnip' },
 
             -- Snippets
@@ -70,7 +71,6 @@ return require('packer').startup(function(use)
     use("eandrju/cellular-automaton.nvim")
     use("laytan/cloak.nvim")
     use("olimorris/onedarkpro.nvim")
-    --use("ray-x/lsp_signature.nvim")
 
     use("onsails/lspkind.nvim")
 
