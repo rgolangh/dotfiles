@@ -14,14 +14,6 @@ return require('packer').startup(function(use)
     }
 
     use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
-
-    use({
         "folke/trouble.nvim",
         config = function()
             require("trouble").setup {
@@ -44,6 +36,7 @@ return require('packer').startup(function(use)
     use("mbbill/undotree")
     use("tpope/vim-fugitive")
     use("nvim-treesitter/nvim-treesitter-context");
+    use("folke/tokyonight.nvim");
 
     use {
         'VonHeikemen/lsp-zero.nvim',
@@ -53,14 +46,18 @@ return require('packer').startup(function(use)
             { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
+            { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+            { 'j-hui/fidget.nvim', opts = {} },
+            { 'folke/neodev.nvim', opts = {} },
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-cmdline' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' },
+            { 'saadparwaiz1/cmp_luasnip' },
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
@@ -74,4 +71,9 @@ return require('packer').startup(function(use)
     use("laytan/cloak.nvim")
     use("olimorris/onedarkpro.nvim")
     --use("ray-x/lsp_signature.nvim")
+
+    use("onsails/lspkind.nvim")
+
+    use('/home/rgolan/src/venkat.nvim')
+
 end)

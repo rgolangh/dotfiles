@@ -9,15 +9,22 @@ vim.cmd([[
 --Set highlight on search
 vim.opt.incsearch = true
 
---Incremental live completion (note: this is now a default on master)
-vim.o.inccommand = 'nosplit'
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
 
 --Do not save when switching buffers (note: this is now a default on master)
-vim.o.hidden = true
+vim.opt.hidden = true
 
 --Enable mouse mode
 -- vim.o.mouse = 'a'
-vim.o.mouse = ''
+vim.opt.mouse = 'a'
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 5
 
 --Enable break indent
 vim.o.breakindent = true
@@ -36,9 +43,9 @@ vim.wo.signcolumn = 'yes'
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme tokyonight-night")
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "80,120"
 
 --Set completeopt to have a better completion experience
 -- :help completeopt

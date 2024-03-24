@@ -8,3 +8,9 @@ vim.api.nvim_exec(
     false
 )
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"gitcommit", "markdown"},
+  callback = function(args)
+    vim.opt.spell = true
+  end
+})
