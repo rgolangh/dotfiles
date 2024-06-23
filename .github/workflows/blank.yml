@@ -2,12 +2,21 @@ name: Reusable Workflow Building Container Images and Manifests
 
 on:
   workflow_dispatch:
-  push:
-  
+  pull_request_target:
+    branches:
+      - main
+   
 env:
   WF_HELM_REPO: rgolangh/serverless-workflows-helm
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -  uses: actions/checkout@v4
+      - run: | 
+          cat README.md
+
   open-pr:
     runs-on: ubuntu-latest
     permissions:
