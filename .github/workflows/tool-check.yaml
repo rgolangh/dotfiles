@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -  uses: actions/checkout@v4
-      - run: | 
+      - run: |
+          oc version
           buildah --version
           sudo apt-get update && sudo apt upgrade
           sudo apt-get install buildah -y
