@@ -18,4 +18,4 @@ Ascidoc tess
 
 include some file content
 
-include:partial.adoc
+include:partial.adoc[]
