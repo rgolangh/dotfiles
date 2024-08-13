@@ -11,3 +11,11 @@ mainly for gh action tests
 
 
 kkkkkkkk
+
+
+Ascidoc tess
+~~~~~~~~~~~~
+
+include some file content
+
+include:partial.adoc
