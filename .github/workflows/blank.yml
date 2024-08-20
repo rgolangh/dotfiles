@@ -1,4 +1,4 @@
-name: Reusable Workflow Building Container Images and Manifests
+name: Test workflow
 
 on:
   workflow_dispatch:
