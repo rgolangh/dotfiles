@@ -2,6 +2,9 @@ name: Test workflow
 
 on:
   workflow_dispatch:
+  push:
+   tags:
+     - "v*"
   pull_request_target:
     branches:
       - main
@@ -13,6 +16,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          echo "using ref $GITHUB_REF"
+          
       -  uses: actions/checkout@v4
       - run: | 
           cat README.adoc
