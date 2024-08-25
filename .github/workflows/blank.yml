@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "using ref $GITHUB_REF"
+          echo "using ref ${GITHUB_REF#refs/heads/}"
           
       -  uses: actions/checkout@v4
       - run: | 
