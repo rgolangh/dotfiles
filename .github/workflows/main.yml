@@ -15,7 +15,7 @@ jobs:
         run: |
           ls -la
           gh pr list
-          cat << EOF | gh pr ${{ github.event.number }} comment -F -
+          cat << EOF | gh pr comment ${{ github.event.number }} comment -F -
           📢 Repository Notice
           This repository is now dedicated to maintaining the stable-1.1.x version of the Orchestrator, which is deployed using a Helm chart.
           
