@@ -1,3 +1,4 @@
+name: New PR Notice
 on:
   pull_request:
     types:
