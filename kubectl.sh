@@ -1,8 +1,9 @@
 #!/bin/bash
 
 export KUBECONFIG="${HOME}/.kube/config"
-KUBECONFIG+=":${HOME}/clusters/hub-helios04/ocp-dev-cluster/my-cluster/auth/kubeconfig"
-KUBECONFIG+=":${HOME}/clusters/kind/kubeconfig"
+for kc in "${HOME}"/clusters/*/kubeconfig; do
+    KUBECONFIG+=":$kc"
+done
 
 source <(kubectl completion bash)
 alias k='kubectl'
@@ -10,10 +11,10 @@ complete -F __start_kubectl k
 
 function ns() {
     if [ -z "$1" ]; then
-        kubectl config view --minify -o jsonpath='{..namespace}{"\n"}'
+        oc config view --minify -o jsonpath='{..namespace}{"\n"}'
         return
     fi
-    kubectl config set-context --current --namespace "${1}"
+    oc config set-context --current --namespace "${1}"
 }
 
 # inspired and learned a lot from this article - https://opensource.com/article/18/3/creating-bash-completion-script
