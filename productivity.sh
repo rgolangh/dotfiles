@@ -6,6 +6,9 @@ function dnd() {
     gsettings set org.gnome.desktop.notifications show-banners $([ "$v" == "true" ] && echo false || echo true)
 }
 
+function local_openapi() {
+    ramalama --image quay.io/rgolangh/ramalama serve tiny
+}
 
 function noise() {
     pid=/var/run/user/$UID/noise.pid
