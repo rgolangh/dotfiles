@@ -1,0 +1,87 @@
+[user]
+	name = Roy Golan
+	email = rgolan@redhat.com
+
+[core]
+	excludesfile = /home/rgolan/.gitignore
+	editor = nvim
+	pager = diff-highlight | less
+
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+
+[color]
+	ui = always
+
+[color "diff-highlight"]
+	oldHighlight = ul
+	oldReset = noul
+	commit = green
+	meta = yellow
+	frag = cyan
+	old = red
+	new = green
+	whitespace = red reverse
+
+[color "diff"]
+	commit = green
+	meta = yellow
+	frag = cyan
+	old = red
+	new = green
+	whitespace = red reverse
+
+[push]
+	default = simple
+
+[sendemail]
+	smtpserver = smtp.corp.redhat.com
+	smtpserverport = 25
+	smtpencryption = tls~
+
+[alias]
+	root = !pwd
+	st = status
+	rb = pull --rebase origin main
+	br = branch
+	co = checkout
+	pu = push origin HEAD:main
+	st = status
+	fo = format-patch origin
+	ed = commit --amend
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	rev = status ; git log
+	files = show --format= --name-only
+
+[gui]
+	recentrepo = /home/rgolan/src/git/ovirt-engine
+
+[interactive]
+	diffFilter = diff-highlight
+[init]
+	defaultBranch = main
+	templateDir = /var/home/rgolan/.git-template
+[rh-pre-commit]
+	enableLocalConfig = false
+	checkSecrets = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[branch]
+	sort = -committerdate
+[rerere]
+	enabled = true
+	autoUpdate = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[maintenance]
+	repo = /var/home/rgolan/src/kubev2v/forklift

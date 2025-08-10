@@ -1,21 +1,3 @@
-This is the project README
+# Install
 
-mainly for gh action tests
-
-1
-2
-3
-4
-5 
-
-
-
-kkkkkkkk
-
-
-Ascidoc tess
-~~~~~~~~~~~~
-
-include some file content
-
-include::partial.adoc[]
+stow -t $HOME/.bashrc.d -d $PWD bashrc.d

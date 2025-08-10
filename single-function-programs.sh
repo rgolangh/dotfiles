@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 function infect() {
-	ssh-copy-id $1
-	ssh $1
+	ssh-copy-id "${1}"
+	ssh -o PreferredAuthentications=keyboard-interactive "${1}"
 }
 
 function ticker() {

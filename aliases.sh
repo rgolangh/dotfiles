@@ -25,5 +25,5 @@ alias t='task'
 alias xclip='clip'
 alias ag='agrind'
 alias diff='diff --color'
-
-
+alias journal='nvim "/home/rgolan/obsidian/kasten/6-Main Notes/journal.md"'
+alias bw="flatpak run --command=bw com.bitwarden.desktop"
