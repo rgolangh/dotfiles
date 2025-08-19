@@ -64,7 +64,7 @@ jobs:
         uses: kiegroup/git-backporting@main
         with:
           target-branch: $BRANCH_NAME
-          pull-request: $PR_NAME
+          pull-request: $PR_NUMBER
           auth: ${{ secrets.GITHUB_TOKEN }}
           dry-run: ${{ inputs.dryRun }}
 
