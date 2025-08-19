@@ -60,10 +60,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.target_info.outputs.pr_number }}
+          BRANCH_NAME: ${{ steps.target_info.outputs.branch_name }}
         uses: kiegroup/git-backporting@main
         with:
-          target-branch: ${{ inputs.targetBranch }}
-          pull-request: ${{ inputs.pullRequest }}
+          target-branch: ${{ env.PR_NUMBER }}
+          pull-request: ${{ env.BRANCH_NAME }}
           auth: ${{ secrets.GITHUB_TOKEN }}
           dry-run: ${{ inputs.dryRun }}
 
