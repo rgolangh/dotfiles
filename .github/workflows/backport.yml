@@ -63,8 +63,8 @@ jobs:
           BRANCH_NAME: ${{ steps.target_info.outputs.branch_name }}
         uses: kiegroup/git-backporting@main
         with:
-          target-branch: $BRANCH_NAME
-          pull-request: $PR_NUMBER
+          target-branch: ${{ steps.target_info.outputs.branch_name }}
+          pull-request: ${{ steps.target_info.outputs.pr_number }}
           auth: ${{ secrets.GITHUB_TOKEN }}
           dry-run: ${{ inputs.dryRun }}
 
