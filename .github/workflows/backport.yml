@@ -65,6 +65,7 @@ jobs:
         with:
           target-branch: ${{ steps.target_info.outputs.branch_name }}
           pull-request: ${{ github.server_url }}/${{ github.repository }}/pull/${{ steps.target_info.outputs.pr_number }}
+          no-squash: true
           auth: ${{ secrets.GITHUB_TOKEN }}
           dry-run: ${{ inputs.dryRun }}
 
