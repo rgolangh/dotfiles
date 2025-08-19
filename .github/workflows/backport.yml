@@ -59,13 +59,11 @@ jobs:
       - name: Backporting
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ steps.target_info.outputs.pr_number }}
-          BRANCH_NAME: ${{ steps.target_info.outputs.branch_name }}
         uses: kiegroup/git-backporting@main
         with:
+          no-squash: true
           target-branch: ${{ steps.target_info.outputs.branch_name }}
           pull-request: ${{ github.server_url }}/${{ github.repository }}/pull/${{ steps.target_info.outputs.pr_number }}
-          no-squash: true
           auth: ${{ secrets.GITHUB_TOKEN }}
           dry-run: ${{ inputs.dryRun }}
 
