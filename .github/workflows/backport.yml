@@ -3,15 +3,23 @@ name: Backport
 on:
   workflow_dispatch:
     inputs:
-      pull_request_number:
-        description: 'The pull request number to backport'
+      targetBranch:
+        description: 'Target branch'
         required: true
-      target_branch:
-        description: 'The branch to backport to'
+        type: string
+      pullRequest:
+        description: 'Pull request'
         required: true
+        type: string
+      dryRun:
+        description: 'Dry run'
+        required: false
+        default: "true"
+        type: string
   issue_comment:
     types:
       - created
+
 
 jobs:
   backport:
@@ -34,8 +42,8 @@ jobs:
         id: target_info
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            pr_number="${{ github.event.inputs.pull_request_number }}"
-            branch_name="${{ github.event.inputs.target_branch }}"
+            pr_number="${{ github.event.inputs.pullRequest}}"
+            branch_name="${{ github.event.inputs.targetBranch }}"
           else
             pr_number="${{ github.event.issue.number }}"
             branch_name=$(echo "${{ github.event.comment.body }}" | awk '{print $2}')
@@ -47,55 +55,16 @@ jobs:
           echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
           echo "pr_number=$pr_number" >> $GITHUB_OUTPUT
 
-      - name: Get PR information
-        id: pr_info
+
+      - name: Backporting
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.target_info.outputs.pr_number }}
-        run: |
-          pr_data=$(gh pr view $PR_NUMBER --json merged,title,commits)
-          merged=$(echo "$pr_data" | jq -r .merged)
-          if [[ "$merged" != "true" ]]; then
-            echo "PR is not merged. Aborting backport."
-            exit 1
-          fi
-          commit_shas=$(echo "$pr_data" | jq -r '.commits[].oid')
-          title=$(echo "$pr_data" | jq -r .title)
-          echo "commit_shas<<EOF" >> $GITHUB_OUTPUT
-          echo "$commit_shas" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "title<<EOF" >> $GITHUB_OUTPUT
-          echo "$title" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+        uses: kiegroup/git-backporting@main
+        with:
+          target-branch: ${{ inputs.targetBranch }}
+          pull-request: ${{ inputs.pullRequest }}
+          auth: ${{ secrets.GITHUB_TOKEN }}
+          dry-run: ${{ inputs.dryRun }}
 
-      - name: Set up Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create backport branch and cherry-pick
-        id: backport_branch
-        run: |
-          target_branch="${{ steps.target_info.outputs.branch_name }}"
-          pr_number="${{ steps.target_info.outputs.pr_number }}"
-          backport_branch_name="backport-pr${pr_number}-to-${target_branch}"
-          
-          git checkout "$target_branch"
-          git checkout -b "$backport_branch_name"
-          
-          echo "${{ steps.pr_info.outputs.commit_shas }}" | while read commit_sha; do
-            git cherry-pick "$commit_sha"
-          done
-          
-          git push origin "$backport_branch_name"
-          echo "branch_name=$backport_branch_name" >> $GITHUB_OUTPUT
-
-      - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create \
-            --title "Backport: ${{ steps.pr_info.outputs.title }}" \
-            --body "Backports #${{ steps.target_info.outputs.pr_number }}" \
-            --base "${{ steps.target_info.outputs.branch_name }}" \
-            --head "${{ steps.backport_branch.outputs.branch_name }}"
