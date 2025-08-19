@@ -45,7 +45,7 @@ jobs:
             pr_number="${{ github.event.inputs.pullRequest}}"
             branch_name="${{ github.event.inputs.targetBranch }}"
           else
-            pr_number="${{ github.event.pull_request.url }}"
+            pr_number="${{ github.event.issue.number }}"
             branch_name=$(echo "${{ github.event.comment.body }}" | awk '{print $2}')
           fi
           if [[ -z "$branch_name" ]]; then
