@@ -1,0 +1,28 @@
+#!/bin/bash
+# Wrapper to chat with local model I run via Podman Desktop
+# I also created a PR to make it work with Lenovo thinkpad that has Intel Arc GPU
+
+
+# Config 
+# the port changes every time a new servie is created with podman desktop.
+# I still didn't find a way to make it fixed port.
+URL="http://localhost:36443/v1/chat/completions"
+#MODEL="/models/granite-4.0-h-tiny-Q4_K_M.gguf"
+PROMPT="${*}" # read all arguments 
+if [ ! -t 0 ]; then
+  PROMPT_STDIN=$(cat) # read also stdin so it can be passed to the context
+fi
+
+if [[ -z "$PROMPT" ]] && [[ -z "$PROMPT_STDIN" ]]; then
+  echo "Usage: $0 <prompt>"
+  echo "Usage: cat <file> || $0"
+  exit 1
+fi
+
+PAYLOAD=$(jq -n \
+          --arg content "$PROMPT $PROMPT_STDIN" \
+          '{messages: [{role: "user", content: "you are a helpful assistant."}, {role: "user", content: $content}]}')
+
+curl -s "$URL" \
+  -H "Content-Type: application/json" \
+  --data "$PAYLOAD" | jq -r '.choices[0].message.content // .error.message // "Error: No response content"'
