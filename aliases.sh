@@ -28,3 +28,6 @@ alias diff='diff --color'
 alias journal='nvim "/home/rgolan/obsidian/kasten/6-Main Notes/journal.md"'
 alias bw="flatpak run --command=bw com.bitwarden.desktop"
 alias gemini="node $HOME/gemini/gemini.js"
+
+alias copy-offload-board='jira issue list -p MTV -q "labels in (mtv-copy-offload)"'
+alias eco-engineering-cluster-board='jira issue list -p ECOPROJECT -q "labels in (eco-engineering-cluster)"'
