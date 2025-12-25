@@ -17,7 +17,7 @@ function noise() {
         rm $pid
         return
     fi
-    nohup play -n synth brownnoise synth brownnoise mix synth sine amod 0 &
+    nohup play -n synth brownnoise synth brownnoise mix synth sine amod 0 > /dev/null &
     echo $! > $pid
 }
 
@@ -27,4 +27,8 @@ function remove_unknown_ssh() {
         return 1
     fi
     sed "/${1}/d" -i ~/.ssh/known_hosts
+}
+
+function my_defaults() {
+    xdg-mime default nvim.desktop text/plain
 }

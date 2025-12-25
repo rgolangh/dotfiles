@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PATH+=":${KREW_ROOT:-$HOME/.krew}/bin"
+
 export KUBECONFIG="${HOME}/.kube/config"
 for kc in "${HOME}"/clusters/*/kubeconfig; do
     KUBECONFIG+=":$kc"
