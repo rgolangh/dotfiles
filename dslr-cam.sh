@@ -1,19 +1,27 @@
 #!/bin/bash -ex
 
-# This scripts enables a a toggle on/off of a virtual camera. Combining with dslr-cam.desktop
-# launcher makes it even more convenient.
+SCRIPT_DIR=$(dirname $(readlink -f "${BASH_SOURCE[0]}"))
 
 function app() {
-	# this makes sure we kill all child process when the app exists
-	trap 'kill $(jobs -p)' EXIT
-	device=${1-/dev/video0}
-	echo "Using device $device"
+	trap 'cleanup; kill 0 2>/dev/null' EXIT
 
-	# Create a virtual video device using this kernel module
-	$(dirname $(readlink -f "$0"))/virtual-video-dev.sh
+	if ! gphoto2 --auto-detect | grep -q "usb:"; then
+		echo "Error: No camera detected. Connect your DSLR and try again."
+		return 1
+	fi
 
-	gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 "$device" &> /dev/null
+	echo "Starting DSLR camera stream via PipeWire..."
+
+	gphoto2 --stdout --capture-movie \
+		| gst-launch-1.0 fdsrc fd=0 ! \
+		  jpegparse ! jpegdec ! videoconvert ! videorate ! \
+		  "video/x-raw,format=I420,framerate=30/1" ! \
+		  pipewiresink stream-properties="p,media.class=Video/Source,media.role=Camera,node.name=DSLR_Camera,node.description=DSLR_Camera"
 }
 
-source $(dirname $(readlink -f ${BASH_SOURCE[0]}))/toggle-helper.sh
+function cleanup() {
+	echo "Stopped DSLR camera stream."
+}
+
+source "$SCRIPT_DIR/toggle-helper.sh"
 toggle app
